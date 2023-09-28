@@ -20,8 +20,9 @@ import { log } from "console";
 // import { Switch } from "@/components/ui/switch";
 
 export default function Home() {
-  const todoList: string[] = [];
+  // const todoList: string[] = [];
   const [textArea, settextArea] = useState("");
+  const [todoList, settodoList] = useState([""]);
   return (
     <main className="flex gap-10 min-h-screen flex-col items-center justify-center p-24">
       <div className="flex justify-between w-full">
@@ -46,8 +47,7 @@ export default function Home() {
           />
           <Button
             onClick={() => {
-              todoList.push(textArea);
-              settextArea("");
+              settodoList([textArea, ...todoList]);
               console.log(todoList);
             }}
           >
@@ -56,15 +56,18 @@ export default function Home() {
         </CardContent>
         <CardFooter>
           <Separator />
-          {/* insert todo here */}
-          {todoList.map((item, index) => (
-            <div>
-              <h1>hello</h1>
-              <Separator />
-            </div>
-          ))}
         </CardFooter>
       </Card>
+      {/* insert todo here */}
+      {todoList.map((item, index) => (
+        <Card className="w-[600px] p-10 flex justify-between">
+          <h1>{item}</h1>
+          <div className="flex gap-8">
+            <Button>Update </Button>
+            <Button>Delete </Button>
+          </div>
+        </Card>
+      ))}
     </main>
   );
 }
